@@ -45,7 +45,7 @@ public class UserResource {
         return ResponseEntity.created(location()).body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now().toString())
-                        .message("User created")
+                        .message("User created successfully")
                         .statusCode(HttpStatus.CREATED.value())
                         .status(HttpStatus.ACCEPTED)
                         .data(Map.of("user", savedUserDTO))
@@ -53,13 +53,23 @@ public class UserResource {
         );
     }
 
+    @PutMapping
+    public ResponseEntity<HttpResponse> updateUser(@Valid @RequestBody User user) {
+        UserDTO updatedUserDTO = userService.updatedUser(user);
+        return ResponseEntity.created(location()).body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .message("User updated successfully")
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .data(Map.of("user", updatedUserDTO))
+                        .build()
+        );
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<HttpResponse> getUserById(@PathVariable int id) {
         Optional<UserDTO> userDTO = Optional.ofNullable(userService.getUserById(id));
-
-        if (userDTO.isEmpty()) {
-            throw new UserNotFoundException("User not found");
-        }
 
         return ResponseEntity.created(location()).body(
                 HttpResponse.builder()

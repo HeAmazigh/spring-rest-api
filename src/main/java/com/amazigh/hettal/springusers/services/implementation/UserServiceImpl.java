@@ -31,7 +31,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserById(int id) {
+
         Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("User not found");
+        }
+
         return user.map(UserDTOMapper::fromUser).orElse(null);
     }
 
@@ -47,6 +53,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(int id) {
+        Optional<User> checkUserExist = userRepository.findById(id);
+        if (checkUserExist.isEmpty())
+            throw new UserNotFoundException("User not found");
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDTO updatedUser(User user) {
+        Optional<User> checkUserExist = userRepository.findById(user.getId());
+        if (checkUserExist.isEmpty())
+            throw new UserNotFoundException("User not found");
+
+        return UserDTOMapper.fromUser(userRepository.save(user));
     }
 }
