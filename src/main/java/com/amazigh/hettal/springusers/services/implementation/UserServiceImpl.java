@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO addNewUser(User user) {
-        Optional<User> checkUserEmailExist = Optional.ofNullable(userRepository.findByEmail(user.getEmail()));
+        Optional<User> checkUserEmailExist = userRepository.findByEmail(user.getEmail());
+
         if (checkUserEmailExist.isPresent())
             throw new EmailAddressAlreadyExistsException("email address already in use");
 
