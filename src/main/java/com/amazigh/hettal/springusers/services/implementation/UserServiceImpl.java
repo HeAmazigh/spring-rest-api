@@ -3,6 +3,8 @@ package com.amazigh.hettal.springusers.services.implementation;
 import com.amazigh.hettal.springusers.domain.User;
 import com.amazigh.hettal.springusers.dto.UserDTO;
 import com.amazigh.hettal.springusers.dtomapper.UserDTOMapper;
+import com.amazigh.hettal.springusers.exception.EmailAddressAlreadyExistsException;
+import com.amazigh.hettal.springusers.exception.UserNotFoundException;
 import com.amazigh.hettal.springusers.repository.UserRepository;
 import com.amazigh.hettal.springusers.services.UserService;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO addNewUser(User user) {
+        Optional<User> checkUserEmailExist = Optional.ofNullable(userRepository.findByEmail(user.getEmail()));
+        if (checkUserEmailExist.isPresent())
+            throw new EmailAddressAlreadyExistsException("email address already in use");
+
         return UserDTOMapper.fromUser(userRepository.save(user));
     }
 
