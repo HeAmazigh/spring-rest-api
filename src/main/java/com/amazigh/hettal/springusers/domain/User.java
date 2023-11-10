@@ -30,6 +30,14 @@ public class User {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.createdAt = createdAt;
+    }
+
+    public User(String firstName, String lastName, String email, String password, LocalDateTime createdAt) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
@@ -90,7 +98,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }
