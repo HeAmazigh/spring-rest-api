@@ -26,21 +26,19 @@ public class User {
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String email, String password, LocalDateTime createdAt) {
+    public User(int id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.createdAt = createdAt;
     }
 
-    public User(String firstName, String lastName, String email, String password, LocalDateTime createdAt) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.createdAt = createdAt;
     }
 
     public int getId() {

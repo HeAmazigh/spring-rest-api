@@ -9,6 +9,7 @@ import com.amazigh.hettal.springusers.repository.UserRepository;
 import com.amazigh.hettal.springusers.services.UserService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class UserServiceImpl implements UserService {
         if (checkUserEmailExist.isPresent())
             throw new EmailAddressAlreadyExistsException("email address already in use");
 
+        user.setCreatedAt(LocalDateTime.now());
         return UserDTOMapper.fromUser(userRepository.save(user));
     }
 

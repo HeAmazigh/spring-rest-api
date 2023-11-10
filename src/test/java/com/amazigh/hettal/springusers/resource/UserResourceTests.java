@@ -37,9 +37,9 @@ public class UserResourceTests {
                 "Hettal",
                 "Amazigh",
                 "amazighhettal@gmail.com",
-                "password",
-                LocalDateTime.now()
+                "password"
         );
+        user.setCreatedAt(LocalDateTime.now());
         BDDMockito.given(userService.addNewUser(ArgumentMatchers.any(User.class)))
                 .willAnswer((invocation) -> {
                     User userArg = invocation.getArgument(0);

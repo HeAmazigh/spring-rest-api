@@ -23,9 +23,9 @@ public class UserRepositoryTests {
                 "Hettal",
                 "Amazigh",
                 "amazighhettal@gmail.com",
-                "password",
-                LocalDateTime.now()
+                "password"
         );
+        user.setCreatedAt(LocalDateTime.now());
         //when
         User savedUser = userRepository.save(user);
 

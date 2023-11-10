@@ -42,9 +42,9 @@ public class UserServiceTests {
                 "Hettal",
                 "Amazigh",
                 "amazigh@gmail.com",
-                "password",
-                LocalDateTime.now()
+                "password"
         );
+        user.setCreatedAt(LocalDateTime.now());
     }
 
     // JUnit test for saveUser
@@ -88,9 +88,10 @@ public class UserServiceTests {
                 "Hettal 1",
                 "Amazigh 1",
                 "amazighettal@gmail.com",
-                "password",
-                LocalDateTime.now()
+                "password"
         );
+
+        user.setCreatedAt(LocalDateTime.now());
 
         given(userRepository.findAll()).willReturn(List.of(user, user1));
 
@@ -111,9 +112,10 @@ public class UserServiceTests {
                 "Hettal 1",
                 "Amazigh 1",
                 "amazighettal@gmail.com",
-                "password",
-                LocalDateTime.now()
+                "password"
         );
+
+        user.setCreatedAt(LocalDateTime.now());
 
         given(userRepository.findAll()).willReturn(Collections.emptyList());
 
